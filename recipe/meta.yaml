@@ -1,5 +1,5 @@
 {% set name = "gptcache" %}
-{% set version = "0.1.19" %}
+{% set version = "0.1.20" %}
 
 package:
   name: {{ name|lower }}
@@ -7,19 +7,22 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/gptcache-{{ version }}.tar.gz
-  sha256: 6d7cbc4105354575385fec0efc18a6e5d4262e290c6b7b0d000ff741a82799de
+  sha256: 4e2f858b0291573d7dd04007754936a7e5a7c80fae318d30f47f2de7791244d8
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
+  # Minimum Python requirement is 3.8, and openai isn't available on s390x.
+  skip: True # [py<38 or s390x]
 
 requirements:
   host:
-    - python >=3.8
+    - python
     - pip
+    - wheel
+    - setuptools 66.0
   run:
-    - python >=3.8
+    - python
     - openai
     - numpy
     - cachetools
@@ -33,10 +36,17 @@ test:
     - pip
 
 about:
-  home: https://github.com/zilliztech/GPTCache
-  summary: GPTCache, a powerful caching library that can be used to speed up and lower the cost of chat applications that rely on the LLM service. GPTCache works as a memcache for AIGC applications, similar to how Redis works for traditional applications.
+  home: https://zilliz.com/what-is-gptcache
+  summary: GPTCache is a project dedicated to building a semantic cache for storing LLM responses.
+  description: |
+    GPTCache is a powerful caching library that can be used to speed up and lower the cost of
+    chat applications that rely on the LLM service. GPTCache works as a memcache for
+    AIGC applications, similar to how Redis works for traditional applications.
   license: MIT
+  license_family: MIT
   license_file: LICENSE
+  dev_url: https://github.com/zilliztech/GPTCache
+  doc_url: https://github.com/zilliztech/GPTCache/tree/main/docs
 
 extra:
   recipe-maintainers:
