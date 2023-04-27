@@ -29,6 +29,7 @@ requirements:
     - python
     - openai
     - numpy
+    - requests
     - cachetools
 
 test:
