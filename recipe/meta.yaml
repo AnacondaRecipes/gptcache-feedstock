@@ -13,7 +13,7 @@ source:
 
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
   # Minimum Python requirement is 3.8, and openai isn't available on s390x.
   skip: True # [py<38 or s390x]
 
@@ -24,7 +24,7 @@ requirements:
     - python
     - pip
     - wheel
-    - setuptools 66.0
+    - setuptools
   run:
     - python
     - openai
