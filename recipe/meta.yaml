@@ -29,16 +29,15 @@ requirements:
     - setuptools
   run:
     - python
+    - numpy
+    - requests
+    - cachetools
+  run_constrained:
     # openai isn't mentioned in requirements.txt
     # but its import hardcoded as 'pip install openai==0.28.1' through import_openai()
     # see https://github.com/zilliztech/GPTCache/blob/0.1.43/gptcache/embedding/openai.py#L8-L10
     # because gptcache doesn't have support for openai >=1,
     # see also https://github.com/zilliztech/GPTCache/issues/576
-    #- openai <1.0.0a1
-    - numpy
-    - requests
-    - cachetools
-  run_constrained:
     - openai <1.0.0a0
 
 test:
