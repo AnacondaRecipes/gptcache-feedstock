@@ -44,7 +44,8 @@ test:
     - gptcache
   commands:
     - pip check
-    - gptcache_server --help
+    # Need extra access to install some deps with pip on Windows, like uvicorn, etc.
+    - gptcache_server --help  # [not win]
   requires:
     - pip
 
